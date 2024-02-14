@@ -1,0 +1,95 @@
+q1:
+
+SQL> set serveroutput on
+SQL> declare
+  2  roll_num numeric(3);
+  3  grade numeric(2,1);
+  4  begin
+  5      roll_num :='&roll_number';
+  6      dbms_output.put_line('roll is: '||roll_num);
+  7
+  8      select gpa into grade
+  9      from studenttable
+ 10      where roll_no = roll_num;
+ 11      dbms_output.put_line('gpa is = '||grade);
+ 12  end;
+ 13  /
+Enter value for roll_number: 1
+old   5:     roll_num :='&roll_number';
+new   5:     roll_num :='1';
+roll is: 1
+gpa is = 5.8
+
+PL/SQL procedure successfully completed
+
+
+q2:
+
+set serveroutput on
+SQL> declare
+  2  roll_num numeric(3);
+  3  grade numeric(2,1);
+  4  marks char(2);
+  5  begin
+  6  roll_num:='&Roll_number';
+  7  DBMS_OUTPUT.PUT_LINE('Input roll number: '||roll_num);
+  8  select gpa into grade
+  9  from studenttable
+ 10  where roll_no=roll_num;
+ 11  if grade>=9 then marks:='A+';
+ 12  elsif grade>=8 then marks:='B';
+ 13  elsif grade>=7 then marks:='C';
+ 14  elsif grade >=6 then marks:='D';
+ 15  elsif grade>=5 then marks:='E';
+ 16  else marks:='F';
+ 17  end if;
+ 18  dbms_output.put_line('gpa is = '||grade);
+ 19  dbms_output.put_line('marks is = '||marks);
+ 20  end;
+ 21  /
+Enter value for roll_number: 1
+old   6: roll_num:='&Roll_number';
+new   6: roll_num:='1';
+Input roll number: 1
+gpa is = 5.8
+marks is = E
+
+PL/SQL procedure successfully completed.
+
+
+
+
+q3
+
+SQL> set serveroutput on
+SQL>  declare
+  2      doi date;
+  3      dor date;
+  4      days numeric(3);
+  5      fine numeric(5);
+  6      begin
+  7      doi:='&issue';
+  8      DBMS_OUTPUT.PUT_LINE('Date of Issue: '||doi);
+  9     dor:='&return';
+ 10     DBMS_OUTPUT.PUT_LINE('Date of Return: '||dor);
+ 11     days:=dor-doi;
+ 12     if (days<=7) then fine:= days*0;
+ 13     elsif (days>=8 and days<=15) then fine:=days*1;
+ 14     elsif (days>=16 and days<=30) then fine:=days*2;
+ 15     else fine:=days*5;
+ 16     end if;
+ 17     dbms_output.put_line('fine is = '||fine);
+ 18     end;
+ 19     /
+Enter value for issue: 12-Jan-2024
+old   7:     doi:='&issue';
+new   7:     doi:='12-Jan-2024';
+Enter value for return: 5-Feb-2024
+old   9:    dor:='&return';
+new   9:    dor:='5-Feb-2024';
+Date of Issue: 12-JAN-24
+Date of Return: 05-FEB-24
+fine is = 48
+
+PL/SQL procedure successfully completed.
+
